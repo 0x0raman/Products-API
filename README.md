@@ -2,6 +2,9 @@
 # Products API
 
 #### API https://products-api-0e0v.onrender.com
+
+NOTE: Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file located at /products-api/.env
