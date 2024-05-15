@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-const cors = require('cors'); 
+const cors = require('cors');
 
 dotenv.config();
 
@@ -9,9 +9,18 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:3000', 'https://products-frontend-neon.vercel.app'];
+
 app.use(cors({
-    origin: 'http://localhost:3000', 
-    credentials: true, 
+    origin: function (origin, callback) {
+        // Check if the origin is allowed or if it is undefined (e.g., for requests from Postman)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
 }));
 
 app.use(express.json());
